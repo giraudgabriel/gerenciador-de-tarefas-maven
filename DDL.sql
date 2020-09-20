@@ -1,9 +1,13 @@
-# Gerenciador de tarefas - maven - JPA
+drop schema task_manager;
+drop user 'user'@'localhost';
 
+create schema task_manager;
 
-```sql
+use task_manager;
 
-#Tabelas
+create user 'user'@'localhost' identified by 'pass123';
+
+grant select, insert, delete, update on task_manager.* to user@'localhost';
 
 create table usu_usuario(
     usu_id bigint unsigned primary key auto_increment,
@@ -44,5 +48,3 @@ create table fut_funcionario_tarefa (
   constraint fut_tar_fk foreign key (tar_id)
     references tar_tarefa (tar_id)
 );
-
-```
