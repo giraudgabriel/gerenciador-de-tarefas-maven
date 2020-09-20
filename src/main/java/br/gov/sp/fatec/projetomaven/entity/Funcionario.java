@@ -2,7 +2,6 @@ package br.gov.sp.fatec.projetomaven.entity;
 
 import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
@@ -18,8 +17,9 @@ public class Funcionario extends Usuario{
         super();
     }
 
-    public Funcionario(String nomeUsuario, String senha) {
+    public Funcionario(String nome, String nomeUsuario, String senha) {
         super();
+        setNome(nome);
         setNomeUsuario(nomeUsuario);
         setSenha(senha);
     }

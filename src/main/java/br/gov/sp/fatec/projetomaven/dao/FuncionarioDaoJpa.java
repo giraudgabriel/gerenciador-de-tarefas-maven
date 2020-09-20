@@ -53,6 +53,7 @@ public class FuncionarioDaoJpa implements FuncionarioDao {
     public Funcionario buscarFuncionarioPorNomeUsuario(String nomeUsuario) {
         String jpql = "select f from Funcionario f where f.nomeUsuario = :nomeUsuario";
         TypedQuery<Funcionario> query = em.createQuery(jpql, Funcionario.class);
+        query.setParameter("nomeUsuario", nomeUsuario);
         return query.getSingleResult();
     }
 

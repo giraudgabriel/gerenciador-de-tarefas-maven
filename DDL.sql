@@ -25,7 +25,7 @@ create table ger_gerente (
 
 create table fun_funcionario (
   fun_id bigint unsigned primary key,
-  constraint fun_usu_fk foreign key (fun_id) references usu_usuario(usu_id),
+  constraint fun_usu_fk foreign key (fun_id) references usu_usuario(usu_id)
 );
 
 create table tar_tarefa (
