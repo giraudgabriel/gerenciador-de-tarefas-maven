@@ -33,7 +33,7 @@ create table tar_tarefa (
   tar_titulo varchar(50) not null,
   tar_descricao varchar(500) not null,
   tar_data_hora_criacao datetime not null,
-  tar_data_hora_entrega datetime not null,
+  tar_data_hora_entrega datetime null,
   tar_gerente_id bigint unsigned,
   constraint tar_ger_fk foreign key (tar_gerente_id)
     references ger_gerente (ger_id)
