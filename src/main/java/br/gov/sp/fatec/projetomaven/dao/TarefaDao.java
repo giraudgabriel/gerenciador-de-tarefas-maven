@@ -23,6 +23,8 @@ public interface TarefaDao {
 
     public List<Tarefa> buscarTarefasPorGerente(Long id);
 
+    public List<Tarefa> filtroNomeTarefa(Long id,String nomeTarefa);
+
     public void removerTarefa(String nomeTarefa);
 
     public void removerTarefa(Long id);

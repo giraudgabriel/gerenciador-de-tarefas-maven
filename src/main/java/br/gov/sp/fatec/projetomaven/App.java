@@ -52,11 +52,15 @@ public class App {
         tarefa = tarefaDao.adicionarFuncionarioATarefa(funcionario, tarefa);
         System.out.println(tarefa.getTitulo());
         List<Tarefa> tarefas = tarefaDao.buscarTarefasPorFuncionario(funcionario.getId());
+        List<Tarefa> tarefasFiltroNome = tarefaDao.filtroNomeTarefa(funcionario.getId(), tarefa.getTitulo());
 
         for (Tarefa tar : tarefas) {
             System.out.println(tar.getTitulo());
         }
 
+        for (Tarefa tar : tarefasFiltroNome) {
+            System.out.println(tar.getTitulo());
+        }
        
     }
 }

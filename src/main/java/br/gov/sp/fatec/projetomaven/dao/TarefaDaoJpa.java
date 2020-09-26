@@ -77,6 +77,16 @@ public class TarefaDaoJpa implements TarefaDao {
     }
 
     @Override
+    public  List<Tarefa> filtroNomeTarefa(Long id,String nomeTarefa){
+        String jpql = "select t from Tarefa t inner join t.funcionarios  f on f.id = :id and t.titulo LIKE :nomeTarefa";
+        TypedQuery<Tarefa> query = em.createQuery(jpql,Tarefa.class);
+        query.setParameter("id",id);
+        query.setParameter("nomeTarefa", "%"+nomeTarefa+"%");
+        return query.getResultList();
+
+    }
+
+    @Override
     public List<Tarefa> buscarTarefasPorGerente(Long id) {
         String jpql = "select t from Tarefa t inner join t.gerente  g on g.id = :id";
         TypedQuery<Tarefa> query = em.createQuery(jpql, Tarefa.class);
