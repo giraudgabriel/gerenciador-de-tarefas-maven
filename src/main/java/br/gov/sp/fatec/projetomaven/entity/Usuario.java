@@ -9,22 +9,22 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-@Table(name = "usu_usuario")
+@Table(name = "usuario")
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Usuario {                                                                            
+public abstract class Usuario extends IEntity{                                                                            
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usu_id")
     private Long id;
 
-    @Column(name = "usu_nome")
+    @Column(name = "nome")
     private String nome;
 
-    @Column(name = "usu_nome_usuario")
+    @Column(name = "nome_usuario")
     private String nomeUsuario;
 
-    @Column(name = "usu_senha")
+    @Column(name = "senha")
     private String senha;
 
     public Long getId() {

@@ -15,34 +15,34 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Table(name = "tar_tarefa")
+@Table(name = "tarefa")
 @Entity
-public class Tarefa {
+public class Tarefa extends IEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tar_id")
     private Long id;
 
-    @Column(name = "tar_titulo")
+    @Column(name = "titulo")
     private String titulo;
 
-    @Column(name = "tar_descricao")
+    @Column(name = "descricao")
     private String descricao;
 
-    @Column(name = "tar_data_hora_criacao")
+    @Column(name = "data_hora_criacao")
     private Date dataHoraCriacao;
 
-    @Column(name = "tar_data_hora_entrega")
+    @Column(name = "data_hora_entrega")
     private Date dataHoraEntrega;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "tar_gerente_id")
+    @JoinColumn(name = "gerente_id")
     private Gerente gerente;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "fut_funcionario_tarefa", joinColumns = { @JoinColumn(name = "tar_id") }, inverseJoinColumns = {
-            @JoinColumn(name = "fun_id") })
-    private Set<Funcionario> funcionarios;
+    @JoinTable(name = "desenvolvedor_tarefa", joinColumns = { @JoinColumn(name = "tar_id") }, inverseJoinColumns = {
+            @JoinColumn(name = "dev_id") })
+    private Set<Desenvolvedor> desenvolvedores;
 
     public Long getId() {
         return id;
@@ -92,12 +92,11 @@ public class Tarefa {
         this.gerente = gerente;
     }
 
-    public Set<Funcionario> getFuncionarios() {
-        return funcionarios;
+    public Set<Desenvolvedor> getDesenvolvedores() {
+        return desenvolvedores;
     }
 
-    public void setFuncionarios(Set<Funcionario> funcionarios) {
-        this.funcionarios = funcionarios;
+    public void setDesenvolvedores(Set<Desenvolvedor> desenvolvedores) {
+        this.desenvolvedores = desenvolvedores;
     }
-
 }

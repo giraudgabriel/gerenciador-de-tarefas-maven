@@ -9,12 +9,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-@Table(name = "ger_gerente")
+@Table(name = "gerente")
 @Entity
 @PrimaryKeyJoinColumn(name = "ger_id")
-public class Gerente extends Usuario {
+public class Gerente extends Funcionario {
 
-    @Column(name = "ger_titulo")
+    @Column(name = "titulo")
     private String titulo;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "gerente")

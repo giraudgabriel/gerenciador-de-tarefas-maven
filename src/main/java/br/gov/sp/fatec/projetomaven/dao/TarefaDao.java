@@ -1,32 +1,26 @@
 package br.gov.sp.fatec.projetomaven.dao;
 
 import br.gov.sp.fatec.projetomaven.entity.Tarefa;
-import br.gov.sp.fatec.projetomaven.entity.Funcionario;
-import br.gov.sp.fatec.projetomaven.entity.Gerente;
+import br.gov.sp.fatec.projetomaven.entity.Desenvolvedor;
 
-import java.util.Date;
 import java.util.List;
 
-public interface TarefaDao {
+public interface TarefaDao extends IEntityDao<Tarefa> {
 
-    public Tarefa cadastrarTarefa(String titulo, String descricao, Date dataHoraCriacao, Gerente gerente);
-
-    public Tarefa salvarTarefa(Tarefa tarefa);
-
-    public Tarefa adicionarFuncionarioATarefa(Funcionario funcionario, Tarefa tarefa);
-
-    public Tarefa buscarTarefa(Long id);
+    public Tarefa adicionarDesenvolvedor(Desenvolvedor desenvolvedor, Tarefa tarefa);
 
     public Tarefa buscarTarefaPorNome(String nomeTarefa);
 
-    public List<Tarefa> buscarTarefasPorFuncionario(Long id);
+    public List<Tarefa> buscarTarefasPorDesenvolvedor(String nomeUsuario);
+
+    public List<Tarefa> buscarTarefasPorDesenvolvedor(Long id);
 
     public List<Tarefa> buscarTarefasPorGerente(Long id);
 
-    public List<Tarefa> filtroNomeTarefa(Long id,String nomeTarefa);
+    public List<Tarefa> buscarTarefasPorGerente(String nomeUsuario);
+
+    public List<Tarefa> buscarTarefasPorFiltro(String filtro);
 
     public void removerTarefa(String nomeTarefa);
-
-    public void removerTarefa(Long id);
 
 }

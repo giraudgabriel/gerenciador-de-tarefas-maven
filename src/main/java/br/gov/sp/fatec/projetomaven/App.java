@@ -1,18 +1,19 @@
 package br.gov.sp.fatec.projetomaven;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
-
-import br.gov.sp.fatec.projetomaven.dao.FuncionarioDao;
-import br.gov.sp.fatec.projetomaven.dao.FuncionarioDaoJpa;
+import br.gov.sp.fatec.projetomaven.dao.DesenvolvedorDao;
+import br.gov.sp.fatec.projetomaven.dao.DesenvolvedorDaoJpa;
 import br.gov.sp.fatec.projetomaven.dao.GerenteDao;
 import br.gov.sp.fatec.projetomaven.dao.GerenteDaoJpa;
 import br.gov.sp.fatec.projetomaven.dao.TarefaDao;
 import br.gov.sp.fatec.projetomaven.dao.TarefaDaoJpa;
-import br.gov.sp.fatec.projetomaven.entity.Funcionario;
+import br.gov.sp.fatec.projetomaven.entity.Desenvolvedor;
 import br.gov.sp.fatec.projetomaven.entity.Gerente;
 import br.gov.sp.fatec.projetomaven.entity.PersistenceManager;
 import br.gov.sp.fatec.projetomaven.entity.Tarefa;
@@ -20,23 +21,26 @@ import br.gov.sp.fatec.projetomaven.entity.Tarefa;
 public class App {
     public static void main(String[] args) {
         EntityManager manager = PersistenceManager.getInstance().getEntityManager();
+        //desenvolvedor
+        DesenvolvedorDao desenvolvedorDao = new DesenvolvedorDaoJpa();
+        Desenvolvedor desenvolvedor = new Desenvolvedor();
+        desenvolvedor.setCargo("Desenvolvedor Frontend");
+        desenvolvedor.setSalario(new BigDecimal(2000));
+        desenvolvedor.setNome("Gabriel");
+        desenvolvedor.setNomeUsuario("gabriel");
+        desenvolvedor.setSenha("senha");
+        desenvolvedorDao.salvar(desenvolvedor);
 
-        // funcionario
-        FuncionarioDao funcionarioDao = new FuncionarioDaoJpa(manager);
-        funcionarioDao.cadastrarFuncionario("Gabriel", "gabriel2", "1234");
-        Funcionario funcionario = funcionarioDao.buscarFuncionarioPorNomeUsuario("gabriel2");
-        funcionario.setNome("Gabriel Fernandes Giraud");
-        funcionarioDao.salvarFuncionario(funcionario);
-        //funcionarioDao.removerFuncionario(funcionario.getId());
-        
 
         // gerente
         GerenteDao gerenteDao = new GerenteDaoJpa(manager);
         Gerente gerente = new Gerente();
         gerente.setNome("Eu");
         gerente.setNomeUsuario("elgerente");
+        gerente.setCargo("Gerente de TI");
+        gerente.setSalario(new BigDecimal(5000));
         gerente.setSenha("senha");
-        gerente = gerenteDao.cadastrarGerente("Felipe Nicoletti", "nicoletti", "tcc");
+        gerente = gerenteDao.cadastrar(gerente);
 
         // tarefas
         TarefaDao tarefaDao = new TarefaDaoJpa(manager);
@@ -45,14 +49,17 @@ public class App {
         tarefa.setDescricao("Trabalho do Mineda");
         tarefa.setTitulo("Software FATEC");
         tarefa.setGerente(gerente);
-        tarefa.setFuncionarios(null);
-        tarefa = tarefaDao.cadastrarTarefa(tarefa.getTitulo(), tarefa.getDescricao(), tarefa.getDataHoraCriacao(), tarefa.getGerente());
+        tarefa.setDesenvolvedores(new HashSet<Desenvolvedor>());
+        tarefa.getDesenvolvedores().add(desenvolvedor);
+        tarefa = tarefaDao.salvar(tarefa);
 
         //funcionario tarefa
-        tarefa = tarefaDao.adicionarFuncionarioATarefa(funcionario, tarefa);
+        //tarefa = tarefaDao.adicionarDesenvolvedor(desenvolvedor, tarefa);
+
         System.out.println(tarefa.getTitulo());
-        List<Tarefa> tarefas = tarefaDao.buscarTarefasPorFuncionario(funcionario.getId());
-        List<Tarefa> tarefasFiltroNome = tarefaDao.filtroNomeTarefa(funcionario.getId(), tarefa.getTitulo());
+        List<Tarefa> tarefas = tarefaDao.buscarTarefasPorDesenvolvedor(desenvolvedor.getId());
+        
+        List<Tarefa> tarefasFiltroNome = tarefaDao.buscarTarefasPorFiltro("Software");
 
         for (Tarefa tar : tarefas) {
             System.out.println(tar.getTitulo());
@@ -61,6 +68,5 @@ public class App {
         for (Tarefa tar : tarefasFiltroNome) {
             System.out.println(tar.getTitulo());
         }
-       
     }
 }
