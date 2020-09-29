@@ -97,4 +97,13 @@ public class TarefaDaoJpa extends IEntityDaoJpa<Tarefa> implements TarefaDao {
         query.setParameter("filtro", filtro);
         return query.getResultList();
     }
+
+    @Override
+    public List<Tarefa> buscarTarefasPorFiltro(final String filtro, String nomeUsuarioFuncionario) {
+        final String jpql = "select t from Tarefa t inner join t.desenvolvedores dev on dev.nomeUsuario = :nomeUsuarioFuncionario where t.titulo like :filtro or t.descricao like :filtro ";
+        final TypedQuery<Tarefa> query = em.createQuery(jpql, Tarefa.class);
+        query.setParameter("nomeUsuarioFuncionario", nomeUsuarioFuncionario);
+        query.setParameter("filtro", filtro);
+        return query.getResultList();
+    }
 }

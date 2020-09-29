@@ -21,6 +21,8 @@ public interface TarefaDao extends IEntityDao<Tarefa> {
 
     public List<Tarefa> buscarTarefasPorFiltro(String filtro);
 
+    List<Tarefa> buscarTarefasPorFiltro(final String filtro, String nomeUsuarioFuncionario);
+
     public void removerTarefa(String nomeTarefa);
 
 }
