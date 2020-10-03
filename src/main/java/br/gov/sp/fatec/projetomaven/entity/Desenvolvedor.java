@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Table(name = "desenvolvedor")
 @DiscriminatorColumn(name = "cargo")
 @PrimaryKeyJoinColumn(name = "dev_id")
-@AttributeOverride(name = "usu_id", column = @Column(name = "dev_id"))
+@AttributeOverride(name = "id", column = @Column(name = "dev_id"))
 public class Desenvolvedor extends Usuario {
 
     private String cargo;

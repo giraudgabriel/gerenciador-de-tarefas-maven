@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "gerente")
 @Entity
 @PrimaryKeyJoinColumn(name = "ger_id")
-@AttributeOverride(name = "usu_id", column = @Column(name = "ger_id"))
+@AttributeOverride(name = "id", column = @Column(name = "ger_id"))
 public class Gerente extends Usuario {
 
     @Column(name = "titulo")

@@ -28,7 +28,7 @@ create table desenvolvedor (
   dev_id bigint unsigned primary key,
   cargo varchar(50),
   bd bit,
-   ux bit,
+  ux bit,
   ui bit,
   constraint dev_usu_fk foreign key (dev_id) references usuario(usu_id)
 );
