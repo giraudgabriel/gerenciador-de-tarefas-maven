@@ -3,12 +3,10 @@ package br.gov.sp.fatec.projetomaven.entity;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -17,12 +15,8 @@ import javax.persistence.Table;
 
 @Table(name = "tarefa")
 @Entity
+@AttributeOverride(name = "id", column = @Column(name = "tar_id"))
 public class Tarefa extends IEntity{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tar_id")
-    private Long id;
-
     @Column(name = "titulo")
     private String titulo;
 

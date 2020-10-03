@@ -2,8 +2,9 @@ package br.gov.sp.fatec.projetomaven.entity;
 
 import java.util.Set;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
@@ -12,13 +13,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+@Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "desenvolvedor")
-@Entity
-@PrimaryKeyJoinColumn(name = "dev_id")
 @DiscriminatorColumn(name = "cargo")
-@DiscriminatorValue("Desenvolvedor")
-public class Desenvolvedor extends Funcionario {
+@PrimaryKeyJoinColumn(name = "dev_id")
+@AttributeOverride(name = "usu_id", column = @Column(name = "dev_id"))
+public class Desenvolvedor extends Usuario {
 
     private String cargo;
 

@@ -21,33 +21,18 @@ create table gerente (
   ger_id bigint unsigned primary key,
   titulo varchar(10),
   cargo varchar(50),
-  salario decimal(15,2),
   constraint ger_usu_fk foreign key (ger_id) references usuario(usu_id)
 );
 
 create table desenvolvedor (
   dev_id bigint unsigned primary key,
   cargo varchar(50),
-  salario decimal(15,2),
+  bd bit,
+   ux bit,
+  ui bit,
   constraint dev_usu_fk foreign key (dev_id) references usuario(usu_id)
 );
 
-create table desenvolvedor_backend (
-  dev_id bigint unsigned primary key,
-  cargo varchar(50),
-  salario decimal(15,2),
-  bd bit,
-  constraint devback_usu_fk foreign key (dev_id) references usuario(usu_id)
-);
-
-create table desenvolvedor_frontend (
-  dev_id bigint unsigned primary key,
-  cargo varchar(50),
-  salario decimal(15,2),
-  ux bit,
-  ui bit,
-  constraint devfront_usu_fk foreign key (dev_id) references usuario(usu_id)
-);
 
 create table tarefa (
   tar_id bigint unsigned primary key auto_increment,

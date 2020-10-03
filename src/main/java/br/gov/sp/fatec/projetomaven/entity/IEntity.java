@@ -2,7 +2,9 @@ package br.gov.sp.fatec.projetomaven.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
+@MappedSuperclass
 public abstract class IEntity {
     @Id
     @GeneratedValue

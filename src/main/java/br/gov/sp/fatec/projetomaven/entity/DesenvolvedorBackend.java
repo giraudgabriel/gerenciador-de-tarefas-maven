@@ -1,13 +1,13 @@
 package br.gov.sp.fatec.projetomaven.entity;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "desenvolvedor_backend")
-@DiscriminatorValue("Backend")
+@DiscriminatorValue("B")
 public class DesenvolvedorBackend extends Desenvolvedor{
+    @Column(name = "bd")
     private boolean bd;
 
     public boolean hasBD() {

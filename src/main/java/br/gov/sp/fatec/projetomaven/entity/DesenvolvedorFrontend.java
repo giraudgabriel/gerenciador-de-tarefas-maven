@@ -1,14 +1,15 @@
 package br.gov.sp.fatec.projetomaven.entity;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "desenvolvedor_frontend")
-@DiscriminatorValue("Frontend")
+@DiscriminatorValue("F")
 public class DesenvolvedorFrontend extends Desenvolvedor{
+    @Column(name = "ui")
     private boolean ui;
+    @Column(name = "ux")
     private boolean ux;
 
     public boolean isUi() {

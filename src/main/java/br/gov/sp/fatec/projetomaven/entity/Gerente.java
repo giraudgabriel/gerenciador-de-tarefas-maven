@@ -2,6 +2,7 @@ package br.gov.sp.fatec.projetomaven.entity;
 
 import java.util.Set;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +13,8 @@ import javax.persistence.Table;
 @Table(name = "gerente")
 @Entity
 @PrimaryKeyJoinColumn(name = "ger_id")
-public class Gerente extends Funcionario {
+@AttributeOverride(name = "usu_id", column = @Column(name = "ger_id"))
+public class Gerente extends Usuario {
 
     @Column(name = "titulo")
     private String titulo;
