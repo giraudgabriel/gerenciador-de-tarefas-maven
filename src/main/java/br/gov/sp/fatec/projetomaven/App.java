@@ -37,7 +37,7 @@ public class App {
         gerente.setSenha("senha");
         gerente = gerenteDao.cadastrar(gerente);
 
-        //tarefas
+        // tarefas
         TarefaDao tarefaDao = new TarefaDaoJpa(manager);
         Tarefa tarefa = new Tarefa();
         tarefa.setDataHoraCriacao(new Date());
