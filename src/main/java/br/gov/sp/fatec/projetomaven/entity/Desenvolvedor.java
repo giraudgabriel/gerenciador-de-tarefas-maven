@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
@@ -14,9 +15,9 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "desenvolvedor")
-@DiscriminatorColumn(name = "cargo")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "cargo", discriminatorType = DiscriminatorType.STRING)
 @PrimaryKeyJoinColumn(name = "dev_id")
 @AttributeOverride(name = "id", column = @Column(name = "dev_id"))
 public class Desenvolvedor extends Usuario {
