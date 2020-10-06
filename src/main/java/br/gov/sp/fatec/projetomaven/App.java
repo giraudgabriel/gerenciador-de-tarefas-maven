@@ -13,7 +13,6 @@ import br.gov.sp.fatec.projetomaven.dao.GerenteDaoJpa;
 import br.gov.sp.fatec.projetomaven.dao.TarefaDao;
 import br.gov.sp.fatec.projetomaven.dao.TarefaDaoJpa;
 import br.gov.sp.fatec.projetomaven.entity.Desenvolvedor;
-import br.gov.sp.fatec.projetomaven.entity.DesenvolvedorFrontend;
 import br.gov.sp.fatec.projetomaven.entity.Gerente;
 import br.gov.sp.fatec.projetomaven.entity.PersistenceManager;
 import br.gov.sp.fatec.projetomaven.entity.Tarefa;
@@ -23,7 +22,7 @@ public class App {
         EntityManager manager = PersistenceManager.getInstance().getEntityManager();
         // desenvolvedor
         DesenvolvedorDao desenvolvedorDao = new DesenvolvedorDaoJpa();
-        DesenvolvedorFrontend desenvolvedor = new DesenvolvedorFrontend();
+        Desenvolvedor desenvolvedor = new Desenvolvedor();
         desenvolvedor.setNome("Gabriel");
         desenvolvedor.setNomeUsuario("gabriel");
         desenvolvedor.setSenha("senha");

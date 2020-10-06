@@ -20,16 +20,20 @@ create table usuario(
 create table gerente (
   id bigint unsigned primary key auto_increment,
   titulo varchar(10),
-  cargo varchar(50),
   constraint ger_usu_fk foreign key (id) references usuario(id)
 );
 
 create table desenvolvedor (
   id bigint unsigned primary key auto_increment,
-  cargo varchar(50),
   constraint dev_usu_fk foreign key (id) references usuario(id)
 );
 
+create table desenvolvedor_funcao (
+  id bigint unsigned primary key auto_increment,
+  dev_id bigint unsigned,
+  funcao varchar(50) not null,
+  constraint dev_dev_fk foreign key (dev_id) references desenvolvedor(id)
+);
 
 create table tarefa (
   id bigint unsigned primary key auto_increment,
