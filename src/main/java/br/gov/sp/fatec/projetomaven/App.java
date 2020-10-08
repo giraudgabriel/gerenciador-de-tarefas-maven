@@ -8,11 +8,15 @@ import javax.persistence.EntityManager;
 
 import br.gov.sp.fatec.projetomaven.dao.DesenvolvedorDao;
 import br.gov.sp.fatec.projetomaven.dao.DesenvolvedorDaoJpa;
+import br.gov.sp.fatec.projetomaven.dao.DesenvolvedorFuncaoDao;
+import br.gov.sp.fatec.projetomaven.dao.DesenvolvedorFuncaoDaoJpa;
 import br.gov.sp.fatec.projetomaven.dao.GerenteDao;
 import br.gov.sp.fatec.projetomaven.dao.GerenteDaoJpa;
 import br.gov.sp.fatec.projetomaven.dao.TarefaDao;
 import br.gov.sp.fatec.projetomaven.dao.TarefaDaoJpa;
 import br.gov.sp.fatec.projetomaven.entity.Desenvolvedor;
+import br.gov.sp.fatec.projetomaven.entity.DesenvolvedorFrontend;
+import br.gov.sp.fatec.projetomaven.entity.DesenvolvedorFuncao;
 import br.gov.sp.fatec.projetomaven.entity.Gerente;
 import br.gov.sp.fatec.projetomaven.entity.PersistenceManager;
 import br.gov.sp.fatec.projetomaven.entity.Tarefa;
@@ -21,13 +25,16 @@ public class App {
     public static void main(String[] args) {
         EntityManager manager = PersistenceManager.getInstance().getEntityManager();
         // desenvolvedor
+        DesenvolvedorFuncao desenvolvedorFrontend = new DesenvolvedorFrontend();
         DesenvolvedorDao desenvolvedorDao = new DesenvolvedorDaoJpa();
         Desenvolvedor desenvolvedor = new Desenvolvedor();
         desenvolvedor.setNome("Gabriel");
         desenvolvedor.setNomeUsuario("gabriel");
         desenvolvedor.setSenha("senha");
-        desenvolvedorDao.salvar(desenvolvedor);
-
+        desenvolvedor.setFuncoes(new HashSet<DesenvolvedorFuncao>());
+        desenvolvedor.getFuncoes().add(desenvolvedorFrontend);
+        desenvolvedor = desenvolvedorDao.salvar(desenvolvedor);
+        
         // gerente
         GerenteDao gerenteDao = new GerenteDaoJpa(manager);
         Gerente gerente = new Gerente();
