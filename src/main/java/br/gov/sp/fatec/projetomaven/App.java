@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 
 import br.gov.sp.fatec.projetomaven.dao.DesenvolvedorDao;
 import br.gov.sp.fatec.projetomaven.dao.DesenvolvedorDaoJpa;
+import br.gov.sp.fatec.projetomaven.dao.DesenvolvedorFuncaoDao;
+import br.gov.sp.fatec.projetomaven.dao.DesenvolvedorFuncaoDaoJpa;
 import br.gov.sp.fatec.projetomaven.dao.GerenteDao;
 import br.gov.sp.fatec.projetomaven.dao.GerenteDaoJpa;
 import br.gov.sp.fatec.projetomaven.dao.TarefaDao;
@@ -25,14 +27,16 @@ public class App {
         // desenvolvedor
         DesenvolvedorFuncao desenvolvedorFrontend = new DesenvolvedorFrontend();
         DesenvolvedorDao desenvolvedorDao = new DesenvolvedorDaoJpa();
+        DesenvolvedorFuncaoDao desenvolvedorFuncaoDao = new DesenvolvedorFuncaoDaoJpa();
         Desenvolvedor desenvolvedor = new Desenvolvedor();
         desenvolvedor.setNome("Gabriel");
         desenvolvedor.setNomeUsuario("gabriel");
         desenvolvedor.setSenha("senha");
         desenvolvedor.setFuncoes(new HashSet<DesenvolvedorFuncao>());
-        desenvolvedor.getFuncoes().add(desenvolvedorFrontend);
         desenvolvedor = desenvolvedorDao.salvar(desenvolvedor);
-        
+        desenvolvedorFrontend.setDesenvolvedor(desenvolvedor);
+        desenvolvedorFuncaoDao.salvar(desenvolvedorFrontend);
+
         // gerente
         GerenteDao gerenteDao = new GerenteDaoJpa(manager);
         Gerente gerente = new Gerente();

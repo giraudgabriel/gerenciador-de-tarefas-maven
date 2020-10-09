@@ -18,20 +18,10 @@ import javax.persistence.Table;
 @AttributeOverride(name = "id", column = @Column(name = "dev_fun_id"))
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "funcao")
 public class DesenvolvedorFuncao extends IEntity{
-    @Column(name = "funcao")
-    String funcao;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dev_id")
     private Desenvolvedor desenvolvedor;
 
-    public String getFuncao() {
-        return funcao;
-    }
-
-    public void setFuncao(String funcao) {
-        this.funcao = funcao;
-    }
 
     public Desenvolvedor getDesenvolvedor() {
         return desenvolvedor;
