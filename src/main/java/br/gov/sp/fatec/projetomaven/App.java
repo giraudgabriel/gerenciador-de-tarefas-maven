@@ -8,8 +8,6 @@ import javax.persistence.EntityManager;
 
 import br.gov.sp.fatec.projetomaven.dao.DesenvolvedorDao;
 import br.gov.sp.fatec.projetomaven.dao.DesenvolvedorDaoJpa;
-import br.gov.sp.fatec.projetomaven.dao.DesenvolvedorFuncaoDao;
-import br.gov.sp.fatec.projetomaven.dao.DesenvolvedorFuncaoDaoJpa;
 import br.gov.sp.fatec.projetomaven.dao.GerenteDao;
 import br.gov.sp.fatec.projetomaven.dao.GerenteDaoJpa;
 import br.gov.sp.fatec.projetomaven.dao.TarefaDao;

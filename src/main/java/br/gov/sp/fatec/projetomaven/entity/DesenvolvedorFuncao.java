@@ -1,7 +1,9 @@
 package br.gov.sp.fatec.projetomaven.entity;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
@@ -13,7 +15,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "desenvolvedor_funcao")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "funcao")
+@AttributeOverride(name = "id", column = @Column(name = "dev_fun_id"))
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "funcao")
 public class DesenvolvedorFuncao extends IEntity{
     @Column(name = "funcao")
     String funcao;

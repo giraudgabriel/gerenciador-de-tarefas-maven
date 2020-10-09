@@ -1,5 +1,6 @@
 package br.gov.sp.fatec.projetomaven.entity;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -9,6 +10,7 @@ import javax.persistence.Table;
 @Table(name = "usuario")
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@AttributeOverride(name = "id", column = @Column(name = "usu_id"))
 public abstract class Usuario extends IEntity{                                                                            
 
     @Column(name = "nome")
