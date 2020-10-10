@@ -2,8 +2,6 @@ package br.gov.sp.fatec.projetomaven.entity;
 
 import java.util.Set;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
@@ -13,7 +11,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "desenvolvedor")
-@AttributeOverride(name = "id", column = @Column(name = "dev_id"))
 @PrimaryKeyJoinColumn(name = "dev_id")
 public class Desenvolvedor extends Usuario {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "desenvolvedores")
