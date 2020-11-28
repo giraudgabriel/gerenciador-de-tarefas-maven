@@ -1,5 +1,5 @@
--- drop schema task_manager;
--- drop user 'user'@'localhost';
+drop schema task_manager;
+drop user 'user'@'localhost';
 
 create schema task_manager;
 
@@ -13,6 +13,7 @@ create table usuario(
     usu_id bigint unsigned primary key auto_increment,
     nome varchar(150) not null,
     nome_usuario varchar(50) not null,
+    isAdmin bit not null default 0,
     senha varchar(50) not null,
     constraint usu_nome_usuario_uk unique (nome_usuario) 
 );

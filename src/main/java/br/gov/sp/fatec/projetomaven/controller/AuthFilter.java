@@ -14,6 +14,10 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.gov.sp.fatec.projetomaven.dao.UsuarioDao;
+import br.gov.sp.fatec.projetomaven.dao.UsuarioDaoJpa;
+import br.gov.sp.fatec.projetomaven.entity.Usuario;
+
 public class AuthFilter implements Filter {
 
     private ServletContext context;
@@ -47,11 +51,28 @@ public class AuthFilter implements Filter {
                             String _username = credentials.substring(0, p).trim();
                             String _password = credentials.substring(p + 1).trim();
                             // Se nao bate com configuracao retorna erro
-                            if (!username.equals(_username) || !password.equals(_password)) {
+
+                            UsuarioDao usuarioDao = new UsuarioDaoJpa();
+
+                            Usuario usuario = usuarioDao.buscarPorNomeUsuarioESenha(_username, _password);
+
+                            if (usuario == null) {
                                 unauthorized(response, "Bad credentials");
                                 return;
                             }
-                            // Prossegue com a requisicao
+
+                            this.context.log(usuario.getNomeUsuario());
+                            this.context.log(usuario.getSenha());
+                            String method = request.getMethod();
+
+                            if (method == "DELETE" || method == "PUT") {
+                                if (usuario.getIsAdmin() == null || usuario.getIsAdmin() == false) {
+                                    unauthorized(response, "Sem permissão para excluir ou alterar dados");
+                                    return;
+                                }
+
+                            }
+                            // // Prossegue com a requisicao
                             chain.doFilter(req, res);
                         } else {
                             unauthorized(response, "Invalid authentication token");

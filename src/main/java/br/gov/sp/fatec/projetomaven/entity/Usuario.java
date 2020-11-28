@@ -22,6 +22,9 @@ public abstract class Usuario extends IEntity{
     @Column(name = "senha")
     private String senha;
 
+    @Column(name = "isAdmin")
+    private Boolean isAdmin = false;
+
     public Long getId() {
         return id;
     }
@@ -53,4 +56,12 @@ public abstract class Usuario extends IEntity{
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+	public Boolean getIsAdmin() {
+		return isAdmin != null && isAdmin;
+	}
+
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 }

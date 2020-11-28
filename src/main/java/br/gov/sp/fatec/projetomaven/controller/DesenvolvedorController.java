@@ -66,8 +66,17 @@ public class DesenvolvedorController extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        super.doDelete(req, resp);
+        
+        ObjectMapper mapper = new ObjectMapper();
+        Desenvolvedor desenvolvedor = mapper.readValue(req.getReader(), Desenvolvedor.class);
+
+        DesenvolvedorDao desenvolvedorDao = new DesenvolvedorDaoJpa();
+
+        desenvolvedorDao.excluir(desenvolvedor.getId());
+
+        resp.setCharacterEncoding("UTF-8");
+
+        resp.setStatus(200);
     }
 
     @Override
