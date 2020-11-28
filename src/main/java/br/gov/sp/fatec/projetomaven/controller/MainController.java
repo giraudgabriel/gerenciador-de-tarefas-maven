@@ -13,7 +13,8 @@ public class MainController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().print("Bem vindo!");
+        resp.addHeader("Main", "MainController");
+        resp.getWriter().print("Bem vindo," + resp.getHeader("Usuario") + " !");
     }
 
 }
