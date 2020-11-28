@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class CorsFilter implements Filter {
 
-     private ServletContext context;
+    private ServletContext context;
+
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
             throws IOException, ServletException {
@@ -23,14 +24,14 @@ public class CorsFilter implements Filter {
 
         this.context.log("CORSFilter HTTP Request: " + request.getMethod());
 
-        //Autoriza
+        // Autoriza
         HttpServletResponse response = (HttpServletResponse) res;
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Methods", "GET, OPTIONS, HEAD, PUT, POST");
         response.addHeader("Access-Control-Allow-Headers", "*");
 
-        //Com requisições OPTIONS
-        if(request.getMethod().equals("OPTIONS")){
+        // Com requisições OPTIONS
+        if (request.getMethod().equals("OPTIONS")) {
             response.setStatus(HttpServletResponse.SC_ACCEPTED);
             return;
         }
@@ -47,5 +48,5 @@ public class CorsFilter implements Filter {
         this.context = filterConfig.getServletContext();
         this.context.log("Filtro inicializado!");
     }
-    
+
 }
