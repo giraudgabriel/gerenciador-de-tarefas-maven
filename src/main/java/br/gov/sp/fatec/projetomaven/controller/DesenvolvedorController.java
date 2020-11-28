@@ -37,4 +37,29 @@ public class DesenvolvedorController extends HttpServlet {
         out.print(desenvolvedorJson);
         out.flush();
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+         ObjectMapper mapper = new ObjectMapper();
+        Desenvolvedor desenvolvedor = mapper.readValue(req.getReader(), Desenvolvedor.class);
+
+        DesenvolvedorDao desenvolvedorDao = new DesenvolvedorDaoJpa();
+        desenvolvedorDao.salvar(desenvolvedor);
+
+        String desenvolvedorJson = mapper.writeValueAsString(desenvolvedor);
+
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+
+        resp.setStatus(201);
+
+        String location = req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + "/dev?id=" + desenvolvedor.getId();
+
+        resp.setHeader("Location", location);
+
+        PrintWriter out = resp.getWriter();
+
+        out.print(desenvolvedorJson);
+        out.flush();
+    }
 }

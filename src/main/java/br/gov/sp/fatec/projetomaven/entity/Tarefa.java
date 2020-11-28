@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Table(name = "tarefa")
 @Entity
 @AttributeOverride(name = "id", column = @Column(name = "tar_id"))
@@ -29,10 +31,12 @@ public class Tarefa extends IEntity{
     @Column(name = "data_hora_entrega")
     private Date dataHoraEntrega;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "gerente_id")
     private Gerente gerente;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "desenvolvedor_tarefa", joinColumns = { @JoinColumn(name = "tar_id") }, inverseJoinColumns = {
             @JoinColumn(name = "dev_id") })
