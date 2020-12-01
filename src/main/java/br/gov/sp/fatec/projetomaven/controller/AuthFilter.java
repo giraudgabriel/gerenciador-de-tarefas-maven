@@ -21,8 +21,6 @@ import br.gov.sp.fatec.projetomaven.entity.Usuario;
 public class AuthFilter implements Filter {
 
     private ServletContext context;
-    private String username = "admin";
-    private String password = "password_dificil";
     private String realm = "PROTECTED";
 
     @Override
@@ -34,23 +32,17 @@ public class AuthFilter implements Filter {
         // Verifica se tem o header Authorization
         String authHeader = request.getHeader("Authorization");
         if (authHeader != null) {
-            // Divide o conteúdo do header por espacos
             StringTokenizer st = new StringTokenizer(authHeader);
-            // Se possui conteúdo
             if (st.hasMoreTokens()) {
                 String basic = st.nextToken();
-                // Verifica se possui o prefixo Basic
                 if (basic.equalsIgnoreCase("Basic")) {
                     try {
-                        // Extrai as credenciais (Base64)
                         String credentials = new String(Base64.getDecoder().decode(st.nextToken()));
                         this.context.log("Credentials: " + credentials);
-                        // Separa as credenciais em usuario e senha
                         Integer p = credentials.indexOf(":");
                         if (p != -1) {
                             String _username = credentials.substring(0, p).trim();
                             String _password = credentials.substring(p + 1).trim();
-                            // Se nao bate com configuracao retorna erro
 
                             UsuarioDao usuarioDao = new UsuarioDaoJpa();
 
@@ -61,8 +53,6 @@ public class AuthFilter implements Filter {
                                 return;
                             }
 
-                            this.context.log(usuario.getNomeUsuario());
-                            this.context.log(usuario.getSenha());
                             String method = request.getMethod();
 
                             if (method == "DELETE" || method == "PUT") {
@@ -97,8 +87,8 @@ public class AuthFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
         this.context = config.getServletContext();
         this.context.log("Filtro inicializado!");
-        this.username = config.getInitParameter("username");
-        this.password = config.getInitParameter("password");
+        config.getInitParameter("username");
+        config.getInitParameter("password");
         String paramRealm = config.getInitParameter("realm");
         if (paramRealm != null && paramRealm.length() > 0) {
             this.realm = paramRealm;

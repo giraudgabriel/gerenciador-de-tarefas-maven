@@ -1,1 +1,2 @@
 mvn exec:java -Dexec.mainClass="br.gov.sp.fatec.projetomaven.App"  
+mvn jetty:run

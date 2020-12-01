@@ -12,6 +12,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.gov.sp.fatec.projetomaven.dao.DesenvolvedorDao;
 import br.gov.sp.fatec.projetomaven.dao.DesenvolvedorDaoJpa;
+import br.gov.sp.fatec.projetomaven.dao.UsuarioDao;
+import br.gov.sp.fatec.projetomaven.dao.UsuarioDaoJpa;
 import br.gov.sp.fatec.projetomaven.entity.Desenvolvedor;
 
 public class DesenvolvedorController extends HttpServlet {
@@ -66,16 +68,10 @@ public class DesenvolvedorController extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
-        ObjectMapper mapper = new ObjectMapper();
-        Desenvolvedor desenvolvedor = mapper.readValue(req.getReader(), Desenvolvedor.class);
-
+        Long id = Long.valueOf(req.getParameter("id"));
         DesenvolvedorDao desenvolvedorDao = new DesenvolvedorDaoJpa();
-
-        desenvolvedorDao.excluir(desenvolvedor.getId());
-
+        desenvolvedorDao.excluir(id);
         resp.setCharacterEncoding("UTF-8");
-
         resp.setStatus(200);
     }
 

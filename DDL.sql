@@ -1,5 +1,5 @@
-drop schema task_manager;
-drop user 'user'@'localhost';
+-- drop schema task_manager;
+-- drop user 'user'@'localhost';
 
 create schema task_manager;
 

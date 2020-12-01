@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @AttributeOverride(name = "id", column = @Column(name = "usu_id"))
-public abstract class Usuario extends IEntity{                                                                            
+public class Usuario extends IEntity{                                                                            
 
     @Column(name = "nome")
     private String nome;
