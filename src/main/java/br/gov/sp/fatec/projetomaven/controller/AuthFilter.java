@@ -30,8 +30,11 @@ public class AuthFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
         // Verifica se tem o header Authorization
+        String method = request.getMethod();
         String authHeader = request.getHeader("Authorization");
-        if (authHeader != null) {
+        Boolean isMethod = method == "DELETE" || method == "PUT";
+        this.context.log(isMethod.toString());
+        if (authHeader != null && (isMethod)) {
             StringTokenizer st = new StringTokenizer(authHeader);
             if (st.hasMoreTokens()) {
                 String basic = st.nextToken();
@@ -41,38 +44,33 @@ public class AuthFilter implements Filter {
                         this.context.log("Credentials: " + credentials);
                         Integer p = credentials.indexOf(":");
                         if (p != -1) {
-                            String _username = credentials.substring(0, p).trim();
-                            String _password = credentials.substring(p + 1).trim();
+                        String _username = credentials.substring(0, p).trim();
+                        String _password = credentials.substring(p + 1).trim();
 
-                            UsuarioDao usuarioDao = new UsuarioDaoJpa();
+                        UsuarioDao usuarioDao = new UsuarioDaoJpa();
 
-                            Usuario usuario = usuarioDao.buscarPorNomeUsuarioESenha(_username, _password);
-
-                            if (usuario == null) {
-                                unauthorized(response, "Bad credentials");
-                                return;
-                            }
-
-                            String method = request.getMethod();
-
-                            if (method == "DELETE" || method == "PUT") {
-                                if (usuario.getIsAdmin() == null || usuario.getIsAdmin() == false) {
-                                    unauthorized(response, "Sem permissão para excluir ou alterar dados");
-                                    return;
-                                }
-
-                            }
-                            // // Prossegue com a requisicao
-                            chain.doFilter(req, res);
-                        } else {
-                            unauthorized(response, "Invalid authentication token");
+                        Usuario usuario = usuarioDao.buscarPorNomeUsuarioESenha(_username, _password);
+                        if (usuario == null) {
+                            unauthorized(response, "Bad credentials");
+                            return;
                         }
+                        if (usuario.getIsAdmin() == null || usuario.getIsAdmin() == false) {
+                            unauthorized(response, "Sem permissão para excluir ou alterar dados");
+                            return;
+                        }
+                
+                        chain.doFilter(req, res);
+                    }
                     } catch (UnsupportedEncodingException e) {
                         throw new Error("Couldn't retrieve authentication", e);
                     }
                 }
             }
         } else {
+            if(!isMethod){
+                chain.doFilter(req, res);
+                return;
+            }
             unauthorized(response);
         }
     }
