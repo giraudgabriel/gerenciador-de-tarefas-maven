@@ -1,5 +1,8 @@
 package br.gov.sp.fatec.projetomaven.dao;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import br.gov.sp.fatec.projetomaven.entity.DesenvolvedorFuncao;
@@ -16,6 +19,5 @@ public class DesenvolvedorFuncaoDaoJpa extends IEntityDaoJpa<DesenvolvedorFuncao
     public DesenvolvedorFuncaoDaoJpa(EntityManager manager) {
         super(DesenvolvedorFuncao.class, manager);
         this.em = manager;
-    }
-    
+    }    
 }

@@ -61,4 +61,12 @@
         <servlet-name>desenvolvedorServlet</servlet-name>
         <url-pattern>/dev</url-pattern>
     </servlet-mapping>
+     <servlet>
+        <servlet-name>adminServlet</servlet-name>
+        <servlet-class>br.gov.sp.fatec.projetomaven.controller.AdminController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>adminServlet</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
 </web-app>
